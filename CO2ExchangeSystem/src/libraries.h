@@ -1,0 +1,8 @@
+#include "Particle.h"
+#include "application.h"
+#include "SdFat.h"
+#include "ArduinoJson.h"
+#include "Cozir.h"
+//#include "ParticleSoftSerial.h"
+#include "Adafruit_GPS.h"
+#include "Adafruit_PMTK.h"
