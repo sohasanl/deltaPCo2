@@ -3,7 +3,7 @@
 bool PublishState::sleep(Co2System* pCo2Sys) {
 	pCo2Sys->setCurrentState(new SleepState());
 	Serial.print("going to sleep\n");
-	System.sleep(SLEEP_MODE_DEEP, (pCo2Sys->getSamplingPeriod() - pCo2Sys->getSamplingRate()) * 60);
+	System.sleep(SLEEP_MODE_DEEP, (pCo2Sys->T.samplingPeriod - pCo2Sys->T.samplingRate) * 60);
 	return true;
 }
 bool PublishState::readSensors(Co2System* pCo2Sys) {
@@ -14,7 +14,7 @@ bool PublishState::readSensors(Co2System* pCo2Sys) {
 bool PublishState::publish(Co2System* pCo2Sys) {
 	Serial.print("Publish\n");
 	bool isMaxTime = false;
-	pCo2Sys->setStateTime(millis());
+	pCo2Sys->T.stateTime = millis();
 	
 	while(!isMaxTime)
     {
@@ -36,7 +36,7 @@ bool PublishState::publish(Co2System* pCo2Sys) {
 	  else
       {
         // Took too long to publish, just go to sleep
-        if ((millis() - pCo2Sys->getStateTime()) >= 4000)
+        if ((millis() - pCo2Sys->T.stateTime) >= 4000)
         {
           isMaxTime = true;
           Serial.println("max time for pulishing reach");
@@ -44,15 +44,6 @@ bool PublishState::publish(Co2System* pCo2Sys) {
         Serial.println("Not max time, try again to publish");
       }
 	}
-    // while(!isMaxTime)
-    // { 
-	// 	if (millis() - pCo2Sys->getStateTime() >= (pCo2Sys->getSamplingRate() * 60000))
-	// 	{
-	// 		isMaxTime = true;
-	// 		Serial.print("max time for publishing reach\n");
-	// 	}
-   
-	// }
 	return true;
 }
 bool PublishState::log(Co2System* pCo2Sys) {

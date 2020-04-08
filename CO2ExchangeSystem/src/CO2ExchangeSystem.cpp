@@ -35,6 +35,7 @@ void loop() {
   obj.readSensors(); // will read Co2 and GPS data.
   obj.log();         // log data into SD card using JSON format.
   //obj.publish();   // will publish sensors data to Particle cloud.
+  delay(30000);
   obj.sleep();       // will sleep for (SamplingPeriod - SamplingRate) * 60  minutes
   obj.wakeup();      // change the current state of the State Machine.
 

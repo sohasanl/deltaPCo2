@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "Timing.h"
 #include "application.h"
 #include "SdFat.h"
 #include "ArduinoJson.h"
@@ -6,3 +7,4 @@
 //#include "ParticleSoftSerial.h"
 #include "Adafruit_GPS.h"
 #include "Adafruit_PMTK.h"
+#include "SimpleCLI.h"
